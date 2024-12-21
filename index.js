@@ -5,8 +5,8 @@ import productRoutes from './routes/productRoutes.js'
 const app = express();
 const products = [
   {
-    id: 1,
-    name: 'laptop',
+    id: 123,
+    name: 'ad',
   },
   {
     id: 2,
