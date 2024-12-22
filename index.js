@@ -1,8 +1,15 @@
 import fs from 'fs';
 // import os from 'os';
 import express from 'express';
-import productRoutes from './routes/productRoutes.js'
+import productRoutes from './routes/productRoutes.js';
+import mongoose from 'mongoose';
+import userRoutes from './routes/userRoutes.js';
 const app = express();
+mongoose.connect('mongodb+srv://sujakutuwa2:Happysoul@cluster0.cxvs4.mongodb.net/Shop').then(() => {
+  console.log('successfully connected');
+}).catch(() => {
+  console.log('sth');
+})
 const products = [
   {
     id: 1,
@@ -17,6 +24,7 @@ const products = [
     name: 'abc',
   },
 ];
+app.use(express.json());
 // app.use((req, res, next) => {
 //   const { id } = req.query;
 //   if ([1, 2, 3].includes(Number(id))) {
@@ -26,7 +34,9 @@ const products = [
 //   //   message: 'provide valid id'
 //   // });
 // });
-app.use(productRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+
 app.get('/', (req, res) => {
   // console.log(req.query);
   const { id } = req.query;
